@@ -8,7 +8,7 @@ export default class App extends React.Component {
   render() {
     return(
       <div>
-        <h1>Working !</h1>
+        <h1>StravaXL !</h1>
       </div>
     )
   }

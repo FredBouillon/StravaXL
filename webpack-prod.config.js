@@ -31,10 +31,10 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/,
-        loader: 'babel?stage=0',
+        loader: 'babel',
         include: path.join(__dirname, 'src') },
       { test: /\.js?$/,
-        loader: 'babel?stage=0',
+        loader: 'babel',
         exclude: /node_modules/ },
       { test: /\.scss?$/,
         loader: 'style!css!sass',
