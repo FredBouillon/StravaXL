@@ -16,8 +16,8 @@ export default class App extends React.Component {
 
   componentDidMount() {
     console.log('NODE_ENV', process.env.NODE_ENV);
-     
-    axios.get('http://localhost:8080/api/persons')
+
+    axios.get('http://localhost:8080/api/athlete')
       .then(function (response) {
         console.log('axios result get persons', response);
       })

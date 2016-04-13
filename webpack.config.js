@@ -7,7 +7,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/entry'
+    './frontend/entry'
   ],
 
   output: {
@@ -25,14 +25,16 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
 
+  
+
   module: {
     loaders: [
       { test: /\.jsx$/,
         loader: 'react-hot!babel',
-        include: path.join(__dirname, 'src') },
+        include: path.join(__dirname, 'frontend') },
       { test: /\.js$/,
         loader: 'babel',
-        include: path.join(__dirname, 'src') },
+        include: path.join(__dirname, 'frontend') },
       { test: /\.scss?$/,
         loader: 'style!css!sass',
         include: path.join(__dirname, 'css') },

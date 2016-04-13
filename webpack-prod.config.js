@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
 
   entry: [
-    './src/entry'
+    './frontend/entry'
   ],
 
   output: {
@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/,
         loader: 'babel',
-        include: path.join(__dirname, 'src') },
+        include: path.join(__dirname, 'frontend') },
       { test: /\.js?$/,
         loader: 'babel',
         exclude: /node_modules/ },

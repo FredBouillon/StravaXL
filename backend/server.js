@@ -2,6 +2,7 @@ var express = require('express');
 var cors = require('cors');
 var path = require('path');
 var webpack = require('webpack');
+var strava = require('strava-v3');
 var app = express();
 
 var isDevelopment = (process.env.NODE_ENV !== 'production');
@@ -19,12 +20,23 @@ app.use(express.static(static_path))
     console.log('Listening at localhost:8080');
   });
 
-app.get('/api/persons', function(req, res, next) {
-  res.send('success');
+app.get('/api/athlete', function(req, res, next) {
+  strava.athlete.get({},function(err,payload) {
+    if(!err) {
+      console.log(payload);
+    }
+    else {
+      console.log(err);
+    }
+  });
 });
 
+
+
+
+
 if (isDevelopment) {
-  var config = require('./webpack.config');
+  var config = require('./../webpack.config.js');
   var WebpackDevServer = require('webpack-dev-server');
 
   new WebpackDevServer(webpack(config), {
