@@ -19,7 +19,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('NODE_ENV', process.env.NODE_ENV);
     var self = this;
     axios.get(window.location.origin + '/api/athlete')
       .then(function (response) {
