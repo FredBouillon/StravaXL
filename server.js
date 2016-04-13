@@ -36,7 +36,7 @@ app.get('/api/athlete', function(req, res, next) {
 
 
 if (isDevelopment) {
-  var config = require('./../webpack.config.js');
+  var config = require('./webpack.config.js');
   var WebpackDevServer = require('webpack-dev-server');
 
   new WebpackDevServer(webpack(config), {

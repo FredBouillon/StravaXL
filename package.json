@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "webpack --config ./webpack-prod.config.js --progress --colors",
-    "start": "node backend/server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
