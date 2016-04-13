@@ -23,10 +23,10 @@ app.use(express.static(static_path))
 app.get('/api/athlete', function(req, res, next) {
   strava.athlete.get({},function(err,payload) {
     if(!err) {
-      console.log(payload);
+      res.json(payload);
     }
     else {
-      console.log(err);
+      res.json(err);
     }
   });
 });
@@ -41,7 +41,10 @@ if (isDevelopment) {
 
   new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
-    hot: true
+    hot: true,
+    proxy: {
+      '/api/*': 'http://localhost:8080/'
+    },
   }).listen(3000, 'localhost', function (err, result) {
     if (err) { console.log(err) }
     console.log('Listening at localhost:3000');
