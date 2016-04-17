@@ -25,16 +25,29 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
 
-  
+  eslint: {
+    configFile: '.eslintrc',
+    failOnWarning: false,
+    failOnError: true
+  },
 
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx$|\.js$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules|public)/
+      }
+    ],
     loaders: [
       { test: /\.jsx$/,
         loader: 'react-hot!babel',
-        include: path.join(__dirname, 'frontend') },
+        include: path.join(__dirname, 'frontend'),
+        exclude: /node_modules/},
       { test: /\.js$/,
         loader: 'babel',
-        include: path.join(__dirname, 'frontend') },
+        include: path.join(__dirname, 'frontend'),
+        exclude: /node_modules/},
       { test: /\.scss?$/,
         loader: 'style!css!sass',
         include: path.join(__dirname, 'css') },
