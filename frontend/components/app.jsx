@@ -9,15 +9,6 @@ export default class App extends React.Component {
     };
   }
 
-  render() {
-    return(
-      <div>
-        <h1>StravaXL !</h1>
-        <p>{this.state.athlete.firstname}</p>
-      </div>
-    )
-  }
-
   componentDidMount() {
     var self = this;
     axios.get(window.location.origin + '/api/athlete')
@@ -25,10 +16,19 @@ export default class App extends React.Component {
         console.log('axios result get athlete', response);
         self.setState({
           athlete: response.data
-        })
+        });
       })
       .catch(function (response) {
         console.log(response);
       });
+  }
+
+  render() {
+    return(
+      <div>
+        <h1>{'StravaXL !'}</h1>
+        <p>{this.state.athlete.firstname}</p>
+      </div>
+    );
   }
 }
