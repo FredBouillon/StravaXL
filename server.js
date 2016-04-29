@@ -14,7 +14,6 @@ app.use(express.static(static_path));
 var athleteRoute = require('./backend/routes/athlete.js')(app);
 app.use('/athlete', athleteRoute);
 
-
 app.all('/*', function (req, res) {
   res.sendFile('/index.html', {
     root: static_path
@@ -26,8 +25,6 @@ app.all('/*', function (req, res) {
   console.log('Listening at localhost:8080');
 });
 
-
-
 if (isDevelopment) {
   var config = require('./webpack.config.js');
   var WebpackDevServer = require('webpack-dev-server');
@@ -35,6 +32,7 @@ if (isDevelopment) {
   new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,
+    historyApiFallback: true,
     proxy: {
       '/api/*': 'http://localhost:8080/'
     },
@@ -43,7 +41,3 @@ if (isDevelopment) {
     console.log('Listening at localhost:3000');
   });
 }
-
-// app.all('/*', function(req, res, next) {
-//         res.sendFile('/index.html', { root: path.resolve(config.appPath)});
-//     });
