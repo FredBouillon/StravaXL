@@ -10,8 +10,9 @@ var static_path = path.join(__dirname, 'public');
 app.use(cors());
 
 app.use(express.static(static_path))
-  .get('/', function (req, res) {
-    res.sendFile('index.html', {
+
+  .all('/*', function (req, res) {
+    res.sendFile('/index.html', {
       root: static_path
     });
   }).listen(process.env.PORT || 8080, function (err) {
@@ -39,3 +40,7 @@ if (isDevelopment) {
     console.log('Listening at localhost:3000');
   });
 }
+
+// app.all('/*', function(req, res, next) {
+//         res.sendFile('/index.html', { root: path.resolve(config.appPath)});
+//     });
