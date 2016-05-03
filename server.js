@@ -3,16 +3,17 @@ var cors = require('cors');
 var path = require('path');
 var webpack = require('webpack');
 var app = express();
-
 var isDevelopment = (process.env.NODE_ENV !== 'production');
 var static_path = path.join(__dirname, 'public');
-
-app.use(cors());
-
+require('dotenv').config();
 app.use(express.static(static_path));
+app.use(cors());
 
 var athleteRoute = require('./backend/routes/athlete.js')(app);
 app.use('/athlete', athleteRoute);
+
+var authorizationRoute = require('./backend/routes/authorization.js')(app);
+app.use('/authorization', authorizationRoute);
 
 app.all('/*', function (req, res) {
   res.sendFile('/index.html', {

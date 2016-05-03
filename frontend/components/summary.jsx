@@ -25,8 +25,19 @@ export default class Summary extends React.Component {
     return (
       <div>
         <div>{'Summary'}</div>
+        <button onClick={() => this._onClick()}>{'Log in with strava'}</button>
         <p>{this.state.athlete.firstname}</p>
       </div>
     );
+  }
+
+  _onClick() {
+    axios.get(window.location.origin + '/api/auth/strava')
+      .then(function (response) {
+        console.log('authorization result', response);
+      })
+      .catch(function (response) {
+        console.log('authorization result errorƒ', response);
+      });
   }
 }
