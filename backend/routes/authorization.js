@@ -3,8 +3,8 @@ var authorizationController = require('../controllers/authorizationController');
 
 module.exports = function(app) {
 
-  app.get('/api/auth/strava/', authorizationController.get);
-  app.get('/api/auth/strava/callback', authorizationController.callback);
+  app.get('/api/auth/strava/', authorizationController.login);
+  app.get('/api/auth/strava/token', authorizationController.loginCallback);
 
   return require('express').Router();
 };
