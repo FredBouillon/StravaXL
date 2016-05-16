@@ -4,3 +4,10 @@ export function setAthlete(athlete) {
     athlete
   };
 }
+
+export function clearAthlete() {
+  return {
+    type: 'SET_ATHLETE',
+    athlete: {}
+  };
+}

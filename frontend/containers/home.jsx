@@ -17,9 +17,18 @@ class HomeContainer extends Component {
     this.props.login();
   }
 
+  _onLogoutClick() {
+    this.props.logout();
+  }
+
   render() {
     if (oauthUtils.getAccessToken() && this.props.athlete.firstname) {
-      return <h1>{'Welcome ' + this.props.athlete.firstname}</h1>;
+      return (
+        <div>
+          <h1>{'Welcome ' + this.props.athlete.firstname}</h1>
+          <button onClick={() => this._onLogoutClick() }>{'Log out'}</button>
+        </div>
+      );
     }
     return (
       <div>
@@ -50,6 +59,10 @@ const mapDispatchToProps = (dispatch) => {
         .catch((error) => {
           console.log('authorization result error', error);
         });
+    },
+    logout: () => {
+      oauthUtils.clearAccessToken();
+      dispatch(athleteActions.clearAthlete());
     },
     getAthlete: (accessToken) => {
       athleteApi.get(accessToken)

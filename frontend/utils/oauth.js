@@ -6,6 +6,10 @@ export function setAccessToken(accessToken) {
   localStorage.setItem('accessToken', accessToken);
 }
 
+export function clearAccessToken() {
+  localStorage.removeItem('accessToken');
+}
+
 export function getQueryParamByName(url, queryParam) {
   if (!url) url = window.location.href;
   queryParam = queryParam.replace(/[\[\]]/g, '\\$&');
