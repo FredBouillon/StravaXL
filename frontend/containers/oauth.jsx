@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as athleteActions from '../actionCreators/athleteActions';
 import * as oauthApi from '../api/oauth';
 import * as oauthUtils from '../utils/oauth';
+import { browserHistory } from 'react-router';
 
 class OAuthContainer extends React.Component {
   componentWillMount() {
@@ -23,14 +24,14 @@ OAuthContainer.propTypes = {
   getAccessToken: React.PropTypes.func
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getAccessToken: (code) => {
       oauthApi.getAccessToken(code)
         .then((response) => {
           oauthUtils.setAccessToken(response.data.access_token);
           dispatch(athleteActions.setAthlete(response.data.athlete));
-          ownProps.history.pushState(null, '/');
+          browserHistory.push('/');
         })
         .catch((error) => {
           console.log('error', error);
