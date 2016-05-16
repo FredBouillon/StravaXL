@@ -17,7 +17,7 @@ import { Provider } from 'react-redux';
 import axios from 'axios';
 import * as oauthUtils from './utils/oauth';
 
-let store = createStore(reducers);
+const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(reducers);
 
 const muiTheme = getMuiTheme({
   palette: {
