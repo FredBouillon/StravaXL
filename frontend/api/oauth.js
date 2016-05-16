@@ -11,3 +11,6 @@ export function getAccessToken(code) {
   return axios.get(oauthUrl + '/token?code=' + code);
 }
 
+export function deauthorize() {
+  return axios.get(oauthUrl + '/deauthorize');
+}

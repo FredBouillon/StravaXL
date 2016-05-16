@@ -24,5 +24,10 @@ module.exports = {
       .then(function (result) {
         res.json(result);
       });
+  },
+  deauthorize: function(req, res, next) {
+    strava.oauth.deauthorize({ 'access_token': req.headers.authorization }, function(err, payload) {
+      res.json(payload);
+    });
   }
 };
