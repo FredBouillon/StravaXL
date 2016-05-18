@@ -17,6 +17,12 @@ const store = (window.devToolsExtension ? window.devToolsExtension()(createStore
 
 axios.defaults.headers.common['Authorization'] = oauthUtils.getAccessToken();
 
+require('materialize-css/dist/css/materialize.css');
+// window.jQuery = require('jquery');
+// window.$ = require('jquery');
+require('materialize-css/dist/js/materialize.js');
+//require('materialize-css/js/init.js');
+
 ReactDom.render((
   <Provider store={store}>
     <Router history={browserHistory}>

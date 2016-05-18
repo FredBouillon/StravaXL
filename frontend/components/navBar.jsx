@@ -12,7 +12,7 @@ export default class NavBar extends React.Component {
           <li className="divider"></li>*/}
           <li><a onClick={this.props.onLogout}>Logout</a></li>
         </ul>
-        <nav>
+        <nav className={'red darken-2'}>
           <div className="nav-wrapper">
             <Link to="/"><a className="brand-logo">StravaXL</a></Link>
             <a href="" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
@@ -21,7 +21,7 @@ export default class NavBar extends React.Component {
               <li><Link to="/activities">Activities</Link></li>
               <li>
                 <a className="dropdown-button" data-activates="dropdown1">
-                  <img src={this.props.athlete.profile_medium} className="circle"/>
+                  <img src={this.props.athlete.profile_medium} className="circle" style={{'borderRadius': '15%', 'width': '60%', 'marginTop': '8px', 'marginRight': '-25px'}}/>
                   <i className="material-icons right">arrow_drop_down</i>
                 </a>
               </li>
