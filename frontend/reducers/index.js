@@ -1,11 +1,10 @@
 import athlete from './athlete';
+import ui from './ui';
+import { routerReducer } from 'react-router-redux';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  athlete: {}
-};
-
-export default function reducers(state = initialState, action) {
-  return {
-    athlete: athlete(state.athlete, action)
-  };
-}
+export default combineReducers({
+  ui,
+  athlete,
+  routing: routerReducer
+});

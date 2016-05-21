@@ -1,39 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import Drawer from 'material-ui/Drawer';
+import Avatar from 'material-ui/Avatar';
+import { browserHistory } from 'react-router';
 
-
-export default class NavBar extends React.Component {
+export default class navBar extends React.Component {
+  _navigateTo(path) {
+    browserHistory.push(path);
+  }
+  
+  _renderIconMenu() {
+    return (
+      <IconMenu
+        iconButtonElement={this._renderIconButtonElement()}
+        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+      >
+        <MenuItem primaryText="Sign out" onClick={this.props.logout} />
+      </IconMenu>
+    );
+  }
+  
+  _renderIconButtonElement() {
+    return (
+      <div>
+        <Avatar src={this.props.athlete ? this.props.athlete.profile_medium : ''} />
+        <IconButton><MoreVertIcon color="white"/></IconButton>
+      </div>
+    );
+  }
+  
   render() {
     return (
       <div>
-        <ul id="dropdown1" className="dropdown-content">
-          {/*<li><a href="#!">one</a></li>
-          <li><a href="#!">two</a></li>
-          <li className="divider"></li>*/}
-          <li><a onClick={this.props.onLogout}>Logout</a></li>
-        </ul>
-        <nav className={'red darken-2'}>
-          <div className="nav-wrapper">
-            <Link to="/"><a className="brand-logo">StravaXL</a></Link>
-            <a href="" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-            <ul className="right hide-on-med-and-down">
-              <li><Link to="/summary">Summary</Link></li>
-              <li><Link to="/activities">Activities</Link></li>
-              <li>
-                <a className="dropdown-button" data-activates="dropdown1">
-                  <img src={this.props.athlete.profile_medium} className="circle" style={{'borderRadius': '15%', 'width': '60%', 'marginTop': '8px', 'marginRight': '-25px'}}/>
-                  <i className="material-icons right">arrow_drop_down</i>
-                </a>
-              </li>
-            </ul>
-            <ul className="side-nav" id="mobile-demo">
-              <li><a href="sass.html">Sass</a></li>
-              <li><a href="badges.html">Components</a></li>
-              <li><a href="collapsible.html">Javascript</a></li>
-              <li><a href="mobile.html">Mobile</a></li>
-            </ul>
-          </div>
-        </nav>
+        <Drawer open={this.props.isDrawerOpen}>
+          <AppBar title="StravaXL" onLeftIconButtonTouchTap={this.props.toggleDrawer}/>
+          <MenuItem onClick={this._navigateTo.bind(this, '/summary')}>Summary</MenuItem>
+          <MenuItem onClick={this._navigateTo.bind(this, '/activities')}>Activities</MenuItem>
+        </Drawer>
+        <AppBar
+          title="StravaXL"
+          onLeftIconButtonTouchTap={this.props.toggleDrawer}
+          iconElementRight={this._renderIconMenu()}
+        />
       </div>
     );
   }

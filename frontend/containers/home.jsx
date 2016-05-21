@@ -8,7 +8,7 @@ import * as oauthUtils from '../utils/oauth';
 
 class HomeContainer extends Component {
   componentDidMount() {
-    if (!this.props.athlete.firstname && oauthUtils.getAccessToken()) {
+    if ((!this.props.athlete || !this.props.athlete.firstname) && oauthUtils.getAccessToken()) {
       this.props.getAthlete(oauthUtils.getAccessToken());
     }
   }
@@ -18,7 +18,7 @@ class HomeContainer extends Component {
   }
 
   render() {
-    if (oauthUtils.getAccessToken() && this.props.athlete.firstname) {
+    if (oauthUtils.getAccessToken() && this.props.athlete && this.props.athlete.firstname) {
       return (
         <div>
           <h1>{'Welcome ' + this.props.athlete.firstname}</h1>
