@@ -4,6 +4,7 @@ import * as athleteActions from '../actionCreators/athleteActions';
 import * as oauthApi from '../api/oauth';
 import * as oauthUtils from '../utils/oauth';
 import { browserHistory } from 'react-router';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class OAuthContainer extends React.Component {
   componentWillMount() {
@@ -13,7 +14,8 @@ class OAuthContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="valign-wrapper">
+        <CircularProgress className="valign"/>
         <div>{'Loading'}</div>
       </div>
     );
