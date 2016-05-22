@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import axios from 'axios';
 import * as oauthUtils from './utils/oauth';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { isUserLoggedIn } from './selectors/athlete';
 
 injectTapEventPlugin();
 
@@ -25,21 +26,22 @@ require('materialize-css/dist/js/materialize.js');
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+const _getComponent = (cb, component) => {
+  if (isUserLoggedIn(store.getState())) {
+    cb(null, component);
+  } else {
+    browserHistory.push('/');
+  }
+};
+
 ReactDom.render((
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="oauthcallback" component={OAuth}/>
-        <Route path="summary" getComponent={(nextState, cb) => {
-          const athlete = store.getState().athlete;
-          if (athlete.firstname) {
-            cb(null, Summary);
-          } else {
-            browserHistory.push('/');
-          }
-        } }/>
-        <Route path="activities" component={Activities} />
+        <Route path="summary" getComponent={(nextState, cb) => _getComponent(cb, Summary)}/>
+        <Route path="activities" getComponent={(nextState, cb) => _getComponent(cb, Activities)}/>
       </Route>
     </Router>
   </Provider>

@@ -7,6 +7,7 @@ import * as uiActions from '../actionCreators/uiActions';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import redTheme from '../materialUiThemes/redTheme';
+import { isUserLoggedIn } from '../selectors/athlete';
 
 const muiTheme = getMuiTheme(redTheme);
 
@@ -15,7 +16,12 @@ class AppContainer extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <NavBar athlete={this.props.athlete} logout={this.props.logout} toggleDrawer={this.props.toggleDrawer} isDrawerOpen={this.props.isDrawerOpen}/>
+          <NavBar 
+            athlete={this.props.athlete} 
+            logout={this.props.logout} 
+            toggleDrawer={this.props.toggleDrawer} 
+            isDrawerOpen={this.props.isDrawerOpen}
+            isUserLoggedIn={this.props.isUserLoggedIn}/>
           <div style={this.props.isDrawerOpen ? { 'marginLeft': '300px' } : { 'marginLeft': '50px' }}>
             {this.props.children}
           </div>
@@ -32,7 +38,8 @@ AppContainer.propTypes = {
 const mapStateToProps = (state) => {
   return {
     isDrawerOpen: state.ui.isDrawerOpen,
-    athlete: state.athlete
+    athlete: state.athlete,
+    isUserLoggedIn: isUserLoggedIn(state)
   };
 };
 

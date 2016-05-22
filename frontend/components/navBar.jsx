@@ -13,18 +13,26 @@ export default class navBar extends React.Component {
     browserHistory.push(path);
   }
   
-  _renderIconMenu() {
-    return (
-      <IconMenu
-        iconButtonElement={this._renderIconButtonElement()}
-        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-      >
-        <MenuItem primaryText="Sign out" onClick={this.props.logout} />
-      </IconMenu>
-    );
+  _renderDrawerToggleIcon() {
+    if (!this.props.isUserLoggedIn) {
+      return <div></div>;
+    }
   }
-  
+
+  _renderIconMenu() {
+    if (this.props.isUserLoggedIn) {
+      return (
+        <IconMenu
+          iconButtonElement={this._renderIconButtonElement() }
+          targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+          >
+          <MenuItem primaryText="Sign out" onClick={this.props.logout} />
+        </IconMenu>
+      );
+    }
+  }
+
   _renderIconButtonElement() {
     return (
       <div>
@@ -33,20 +41,23 @@ export default class navBar extends React.Component {
       </div>
     );
   }
-  
+
   render() {
     return (
       <div>
         <Drawer open={this.props.isDrawerOpen}>
-          <AppBar title="StravaXL" onLeftIconButtonTouchTap={this.props.toggleDrawer}/>
-          <MenuItem onClick={this._navigateTo.bind(this, '/summary')}>Summary</MenuItem>
-          <MenuItem onClick={this._navigateTo.bind(this, '/activities')}>Activities</MenuItem>
+          <AppBar 
+            title="StravaXL" 
+            onLeftIconButtonTouchTap={this.props.toggleDrawer}/>
+          <MenuItem onClick={this._navigateTo.bind(this, '/summary') }>Summary</MenuItem>
+          <MenuItem onClick={this._navigateTo.bind(this, '/activities') }>Activities</MenuItem>
         </Drawer>
         <AppBar
           title="StravaXL"
           onLeftIconButtonTouchTap={this.props.toggleDrawer}
-          iconElementRight={this._renderIconMenu()}
-        />
+          iconElementRight={this._renderIconMenu() }
+          iconElementLeft={this._renderDrawerToggleIcon()}
+          />
       </div>
     );
   }
