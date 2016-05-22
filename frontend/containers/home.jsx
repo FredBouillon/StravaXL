@@ -4,7 +4,7 @@ import * as athleteActions from '../actionCreators/athleteActions';
 import * as athleteApi from '../api/athlete';
 import * as oauthApi from '../api/oauth';
 import * as oauthUtils from '../utils/oauth';
-
+import { browserHistory } from 'react-router';
 
 class HomeContainer extends Component {
   componentDidMount() {
@@ -19,6 +19,7 @@ class HomeContainer extends Component {
 
   render() {
     if (oauthUtils.getAccessToken() && this.props.athlete && this.props.athlete.firstname) {
+      browserHistory.push('/summary');
       return (
         <div>
           <h1>{'Welcome ' + this.props.athlete.firstname}</h1>
@@ -27,7 +28,12 @@ class HomeContainer extends Component {
     }
     return (
       <div>
-        <button onClick={() => this._onLoginClick() }>{'Login with strava'}</button>
+        <h1>Welcome to StravaXL</h1>
+        <img 
+          src="../../public/ConnectWithStrava.png"
+          onClick={() => this._onLoginClick()}
+          style={{'cursor':'pointer'}}
+        />
       </div>
     );
   }

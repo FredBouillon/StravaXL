@@ -8,6 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import redTheme from '../materialUiThemes/redTheme';
 import { isUserLoggedIn } from '../selectors/athlete';
+import { browserHistory } from 'react-router';
 
 const muiTheme = getMuiTheme(redTheme);
 
@@ -48,6 +49,7 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => {
       oauthUtils.clearAccessToken();
       dispatch(athleteActions.clearAthlete());
+      browserHistory.push('/');
     },
     toggleDrawer: () => {
       dispatch(uiActions.toggleDrawer());
