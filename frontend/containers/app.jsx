@@ -13,6 +13,13 @@ import { browserHistory } from 'react-router';
 const muiTheme = getMuiTheme(redTheme);
 
 class AppContainer extends Component {
+  _getStyles() {
+    return {
+      marginLeft: this.props.isDrawerOpen ? '306px' : '50px',
+      marginTop: '30px',
+      marginRight: '50px'
+    }
+  }
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -23,7 +30,7 @@ class AppContainer extends Component {
             toggleDrawer={this.props.toggleDrawer} 
             isDrawerOpen={this.props.isDrawerOpen}
             isUserLoggedIn={this.props.isUserLoggedIn}/>
-          <div style={this.props.isDrawerOpen ? { 'marginLeft': '300px' } : { 'marginLeft': '50px' }}>
+          <div style={this._getStyles()}>
             {this.props.children}
           </div>
         </div>
