@@ -24,7 +24,6 @@ axios.defaults.headers.common['Authorization'] = oauthUtils.getAccessToken();
 
 require('materialize-css/dist/css/materialize.css');
 require('materialize-css/dist/js/materialize.js');
-require('../public/ConnectWithStrava.png');
 
 const history = syncHistoryWithStore(browserHistory, store);
 
