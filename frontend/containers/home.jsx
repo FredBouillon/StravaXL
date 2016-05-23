@@ -5,6 +5,7 @@ import * as athleteApi from '../api/athlete';
 import * as oauthApi from '../api/oauth';
 import * as oauthUtils from '../utils/oauth';
 import { browserHistory } from 'react-router';
+import stravaButton from '../../assets/ConnectWithStrava.png';
 
 class HomeContainer extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class HomeContainer extends Component {
       <div>
         <h1>Welcome to StravaXL</h1>
         <img 
-          src="../../public/ConnectWithStrava.png"
+          src={stravaButton}
           onClick={() => this._onLoginClick()}
           style={{'cursor':'pointer'}}
         />

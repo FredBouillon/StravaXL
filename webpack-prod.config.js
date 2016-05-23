@@ -58,9 +58,8 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
       {
-        test: /\.(jpg|png)$/,
-        loader: 'url?limit=25000',
-        include: 'public'
+        test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
+        loader: 'url-loader?limit=10000',
       }
     ]
   }
