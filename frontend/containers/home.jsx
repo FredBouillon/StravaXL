@@ -13,23 +13,21 @@ class HomeContainer extends Component {
       this.props.getAthlete(oauthUtils.getAccessToken());
     }
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if (oauthUtils.getAccessToken() && nextProps.athlete && nextProps.athlete.firstname) {
+      browserHistory.push('/summary');
+    }
+  }
 
   _onLoginClick() {
     this.props.login();
   }
 
   render() {
-    if (oauthUtils.getAccessToken() && this.props.athlete && this.props.athlete.firstname) {
-      browserHistory.push('/summary');
-      return (
-        <div>
-          <h1>{'Welcome ' + this.props.athlete.firstname}</h1>
-        </div>
-      );
-    }
     return (
       <div>
-        <h1>Welcome to StravaXL</h1>
+        <h1>{'Welcome to StravaXL'}</h1>
         <img 
           src={stravaButton}
           onClick={() => this._onLoginClick()}
@@ -42,7 +40,8 @@ class HomeContainer extends Component {
 
 HomeContainer.propTypes = {
   athlete: React.PropTypes.object, //eslint-disable-line
-  getAthlete: React.PropTypes.func
+  getAthlete: React.PropTypes.func,
+  login: React.PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -59,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
           window.location = response.data.uri;
         })
         .catch((error) => {
-          console.log('authorization result error', error);
+          console.log('authorization result error', error); //eslint-disable-line
         });
     },
     getAthlete: (accessToken) => {
@@ -68,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(athleteActions.setAthlete(response.data));
         })
         .catch((err) => {
-          console.log('ATHLETE FAILURE', err);
+          console.log('ATHLETE FAILURE', err); //eslint-disable-line
         });
     }
   };
