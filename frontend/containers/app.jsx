@@ -18,7 +18,7 @@ class AppContainer extends Component {
       marginLeft: this.props.isDrawerOpen ? '306px' : '50px',
       marginTop: '30px',
       marginRight: '50px'
-    }
+    };
   }
   render() {
     return (
@@ -29,7 +29,8 @@ class AppContainer extends Component {
             logout={this.props.logout} 
             toggleDrawer={this.props.toggleDrawer} 
             isDrawerOpen={this.props.isDrawerOpen}
-            isUserLoggedIn={this.props.isUserLoggedIn}/>
+            isUserLoggedIn={this.props.isUserLoggedIn}
+          />
           <div style={this._getStyles()}>
             {this.props.children}
           </div>
@@ -40,7 +41,12 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  children: React.PropTypes.element
+  children: React.PropTypes.element,
+  isDrawerOpen: React.PropTypes.bool,
+  athlete: React.PropTypes.object, //eslint-disable-line
+  logout: React.PropTypes.func,
+  toggleDrawer: React.PropTypes.func,
+  isUserLoggedIn: React.PropTypes.bool
 };
 
 const mapStateToProps = (state) => {

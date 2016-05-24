@@ -2,7 +2,7 @@ import {
 deepOrange700, deepOrange900,
 grey100, grey300, grey400, grey500,
 pinkA200,
-white, darkBlack, fullBlack,
+white, darkBlack, fullBlack
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 
@@ -18,7 +18,7 @@ export default {
     desktopDropDownMenuFontSize: 15,
     desktopDrawerMenuItemHeight: 48,
     desktopSubheaderHeight: 48,
-    desktopToolbarHeight: 56,
+    desktopToolbarHeight: 56
   },
   fontFamily: 'Roboto, sans-serif',
   palette: {
@@ -35,6 +35,6 @@ export default {
     disabledColor: fade(darkBlack, 0.3),
     pickerHeaderColor: deepOrange700,
     clockCircleColor: fade(darkBlack, 0.07),
-    shadowColor: fullBlack,
-  },
+    shadowColor: fullBlack
+  }
 };

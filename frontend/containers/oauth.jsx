@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch) => {
           browserHistory.push('/');
         })
         .catch((error) => {
-          console.log('error', error);
+          console.log('error', error); //eslint-disable-line
         });
     }
   };
