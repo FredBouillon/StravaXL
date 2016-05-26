@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as athleteActions from '../actionCreators/athleteActions';
-import * as athleteApi from '../api/athlete';
 import * as oauthApi from '../api/oauth';
 import * as oauthUtils from '../utils/oauth';
 import { browserHistory } from 'react-router';
@@ -50,7 +49,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
   return {
     login: () => {
       oauthApi.login()
@@ -62,13 +61,7 @@ const mapDispatchToProps = (dispatch) => {
         });
     },
     getAthlete: (accessToken) => {
-      athleteApi.get(accessToken)
-        .then((response) => {
-          dispatch(athleteActions.setAthlete(response.data));
-        })
-        .catch((err) => {
-          console.log('ATHLETE FAILURE', err); //eslint-disable-line
-        });
+      athleteActions.fetchAthlete(accessToken);
     }
   };
 };
