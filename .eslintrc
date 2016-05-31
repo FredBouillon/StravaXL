@@ -1,6 +1,10 @@
 {
   "parser": "babel-eslint", // I want to use babel-eslint for parsing!
   "extends": "eslint:recommended",
+  "globals": {
+    "jasmine": true,
+    "expect": true
+  },
   "rules": {
     "comma-dangle": 1, // dangling commas are ok
     "indent": [2, 2, {
