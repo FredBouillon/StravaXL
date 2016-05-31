@@ -12,6 +12,9 @@ app.use(cors());
 var athleteRoute = require('./backend/routes/athlete.js')(app);
 app.use('/athlete', athleteRoute);
 
+var activitiesRoute = require('./backend/routes/activities.js')(app);
+app.use('/athlete/activities', activitiesRoute);
+
 var authorizationRoute = require('./backend/routes/authorization.js')(app);
 app.use('/authorization', authorizationRoute);
 
