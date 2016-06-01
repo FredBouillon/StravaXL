@@ -8,7 +8,7 @@ import Home from './containers/home.jsx';
 import OAuth from './containers/oauth.jsx';
 import App from './containers/app.jsx';
 import '../css/app.scss';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers/index';
 import { Provider } from 'react-redux';
 import axios from 'axios';
@@ -19,12 +19,14 @@ import thunk from 'redux-thunk';
 
 injectTapEventPlugin();
 
-const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(
+const store = createStore(
   reducers,
-  applyMiddleware(
-    thunk // lets us dispatch() functions
-    // loggerMiddleware // neat middleware that logs actions
-  ));
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);
+
 axios.defaults.headers.common['Authorization'] = oauthUtils.getAccessToken();
 
 require('materialize-css/dist/css/materialize.css');

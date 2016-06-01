@@ -2,50 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as activitiesActions from '../actionCreators/activitiesActions';
 import * as oauthUtils from '../utils/oauth';
-import axios from 'axios';
-
 
 class ActivitiesContainer extends React.Component {
   componentDidMount() {
-    this.props.getActivities(oauthUtils.getAccessToken());
+    this.props.dispatch(
+      activitiesActions.fetchActivities(oauthUtils.getAccessToken())
+    );
   }
   
   render() {
     return (
       <div>
         <div>{'Activities'}</div>
+        <div>{this.props.activities.ride ? this.props.activities.ride.length : 'Loading...'}</div>
       </div>
     );
   }
 }
 
 ActivitiesContainer.propTypes = {
-  getActivities: React.PropTypes.func
+  activities: React.PropTypes.object, //eslint-disable-line
+  dispatch: React.PropTypes.func
 };
 
 const mapStateToProps = (state) => {
   return {
-    //athlete: state.athlete
-  };
-};
-
-const mapDispatchToProps = () => {
-  return {
-    getActivities: (accessToken) => {
-      console.log('fetch activities');
-      //activitiesActions.fetchActivities(accessToken);
-      axios.get(window.location.origin + '/api/athlete/activities')
-      .then(function () {
-        console.log('suc');
-      })
-      .catch(function() {
-        console.log('err');
-      })
-    }
+    activities: state.activities
   };
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ActivitiesContainer);
