@@ -27,7 +27,8 @@ const store = createStore(
   )
 );
 
-axios.defaults.headers.common['Authorization'] = oauthUtils.getAccessToken();
+// axios.defaults.headers.common['Authorization'] = oauthUtils.getAccessToken();
+axios.defaults.headers.common.Authorization = oauthUtils.getAccessToken();
 
 require('materialize-css/dist/css/materialize.css');
 require('materialize-css/dist/js/materialize.js');
@@ -37,7 +38,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 function redirectIfAuthenticated(nextState, replace) {
   if (isUserLoggedIn(store.getState())) {
     replace({
-      pathname: '/summary'
+      pathname: '/summary',
     });
   }
 }
@@ -45,7 +46,7 @@ function redirectIfAuthenticated(nextState, replace) {
 function redirectIfNotAuthenticated(nextState, replace) {
   if (!isUserLoggedIn(store.getState())) {
     replace({
-      pathname: '/'
+      pathname: '/',
     });
   }
 }
@@ -54,10 +55,10 @@ ReactDom.render((
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} onEnter={redirectIfAuthenticated}/>
-        <Route path="oauthcallback" component={OAuth}/>
-        <Route path="summary" component={Summary} onEnter={redirectIfNotAuthenticated}/>
-        <Route path="activities" component={Activities} onEnter={redirectIfNotAuthenticated}/>
+        <IndexRoute component={Home} onEnter={redirectIfAuthenticated} />
+        <Route path="oauthcallback" component={OAuth} />
+        <Route path="summary" component={Summary} onEnter={redirectIfNotAuthenticated} />
+        <Route path="activities" component={Activities} onEnter={redirectIfNotAuthenticated} />
       </Route>
     </Router>
   </Provider>

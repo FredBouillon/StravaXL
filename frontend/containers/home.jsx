@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as athleteActions from '../actionCreators/athleteActions';
 import * as oauthApi from '../api/oauth';
@@ -12,7 +12,7 @@ class HomeContainer extends Component {
       this.props.getAthlete(oauthUtils.getAccessToken());
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (oauthUtils.getAccessToken() && nextProps.athlete && nextProps.athlete.firstname) {
       browserHistory.push('/summary');
@@ -27,10 +27,11 @@ class HomeContainer extends Component {
     return (
       <div>
         <h1>{'Welcome to StravaXL'}</h1>
-        <img 
+        <img
           src={stravaButton}
           onClick={() => this._onLoginClick()}
-          style={{'cursor':'pointer'}}
+          style={{ cursor: 'pointer' }}
+          alt=""
         />
       </div>
     );
@@ -38,33 +39,29 @@ class HomeContainer extends Component {
 }
 
 HomeContainer.propTypes = {
-  athlete: React.PropTypes.object, //eslint-disable-line
+  athlete: React.PropTypes.object,
   getAthlete: React.PropTypes.func,
-  login: React.PropTypes.func
+  login: React.PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    athlete: state.athlete
-  };
-};
+const mapStateToProps = (state) => ({
+  athlete: state.athlete,
+});
 
-const mapDispatchToProps = () => {
-  return {
-    login: () => {
-      oauthApi.login()
-        .then((response) => {
-          window.location = response.data.uri;
-        })
-        .catch((error) => {
-          console.log('authorization result error', error); //eslint-disable-line
-        });
-    },
-    getAthlete: (accessToken) => {
-      athleteActions.fetchAthlete(accessToken);
-    }
-  };
-};
+const mapDispatchToProps = () => ({
+  login: () => {
+    oauthApi.login()
+      .then((response) => {
+        window.location = response.data.uri;
+      })
+      .catch((error) => {
+        console.log('authorization result error', error); //eslint-disable-line
+      });
+  },
+  getAthlete: (accessToken) => {
+    athleteActions.fetchAthlete(accessToken);
+  },
+});
 
 export default connect(
   mapStateToProps,

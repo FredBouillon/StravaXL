@@ -4,7 +4,5 @@ const getAthlete = (state) => state.athlete;
 
 export const isUserLoggedIn = createSelector(
   [getAthlete],
-  (athlete) => {
-    return !!athlete.firstname;
-  }
+  (athlete) => !!athlete.firstname
 );

@@ -17,13 +17,14 @@ export default class navBar extends React.Component {
     if (!this.props.isUserLoggedIn) {
       return <div></div>;
     }
+    return null;
   }
 
   _renderIconMenu() {
     if (this.props.isUserLoggedIn) {
       return (
         <IconMenu
-          iconButtonElement={this._renderIconButtonElement() }
+          iconButtonElement={this._renderIconButtonElement()}
           targetOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         >
@@ -31,16 +32,20 @@ export default class navBar extends React.Component {
         </IconMenu>
       );
     }
+    return null;
   }
 
   _renderIconButtonElement() {
     return (
       <div>
         <Avatar src={this.props.athlete.profile_medium} />
-        <IconButton><MoreVertIcon color="white"/></IconButton>
+        <IconButton>
+          <MoreVertIcon color="white" />
+        </IconButton>
       </div>
     );
   }
+
   render() {
     return (
       <div>
@@ -49,14 +54,22 @@ export default class navBar extends React.Component {
             title="StravaXL"
             onLeftIconButtonTouchTap={this.props.toggleDrawer}
           />
-          <MenuItem onClick={this._navigateTo.bind(this, '/summary') }>{'Summary'}</MenuItem>
-          <MenuItem onClick={this._navigateTo.bind(this, '/activities') }>{'Activities'}</MenuItem>
+          <MenuItem
+            onClick={() => this._navigateTo('/summary')}
+          >
+            {'Summary'}
+          </MenuItem>
+          <MenuItem
+            onClick={() => this._navigateTo('/activities')}
+          >
+            {'Activities'}
+          </MenuItem>
         </Drawer>
         <AppBar
           title="StravaXL"
           onLeftIconButtonTouchTap={this.props.toggleDrawer}
-          iconElementRight={this._renderIconMenu(this.props) }
-          iconElementLeft={this._renderDrawerToggleIcon(this.props) }
+          iconElementRight={this._renderIconMenu(this.props)}
+          iconElementLeft={this._renderDrawerToggleIcon(this.props)}
         />
       </div>
     );
@@ -65,12 +78,10 @@ export default class navBar extends React.Component {
 
 navBar.propTypes = {
   athlete: React.PropTypes.shape({
-    profile_medium: React.PropTypes.string
+    profile_medium: React.PropTypes.string,
   }),
   isDrawerOpen: React.PropTypes.bool,
   isUserLoggedIn: React.PropTypes.bool,
   logout: React.PropTypes.func,
-  toggleDrawer: React.PropTypes.func
- 
+  toggleDrawer: React.PropTypes.func,
 };
-

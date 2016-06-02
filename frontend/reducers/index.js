@@ -8,5 +8,5 @@ export default combineReducers({
   ui,
   athlete,
   activities,
-  routing: routerReducer
+  routing: routerReducer,
 });

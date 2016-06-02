@@ -9,7 +9,7 @@ class ActivitiesContainer extends React.Component {
       activitiesActions.fetchActivities(oauthUtils.getAccessToken())
     );
   }
-  
+
   render() {
     return (
       <div>
@@ -22,14 +22,12 @@ class ActivitiesContainer extends React.Component {
 
 ActivitiesContainer.propTypes = {
   activities: React.PropTypes.object, //eslint-disable-line
-  dispatch: React.PropTypes.func
+  dispatch: React.PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    activities: state.activities
-  };
-};
+const mapStateToProps = (state) => ({
+  activities: state.activities,
+});
 
 export default connect(
   mapStateToProps

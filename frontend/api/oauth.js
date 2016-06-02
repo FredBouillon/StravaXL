@@ -1,16 +1,10 @@
 
 import axios from 'axios';
 
-const oauthUrl = window.location.origin + '/api/auth/strava';
+const oauthUrl = `${window.location.origin}/api/auth/strava`;
 
-export function login() {
-  return axios.get(oauthUrl);
-}
+export const login = () => axios.get(oauthUrl);
 
-export function getAccessToken(code) {
-  return axios.get(oauthUrl + '/token?code=' + code);
-}
+export const getAccessToken = (code) => axios.get(`${oauthUrl}/token?code=${code}`);
 
-export function deauthorize() {
-  return axios.get(oauthUrl + '/deauthorize');
-}
+export const deauthorize = () => axios.get(`${oauthUrl}/deauthorize`);

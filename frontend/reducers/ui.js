@@ -2,7 +2,7 @@ import { RECEIVE_ATHLETE, CLEAR_ATHLETE } from '../actionCreators/athleteActions
 import { TOGGLE_DRAWER } from '../actionCreators/uiActions';
 
 const initialState = {
-  isDrawerOpen: false
+  isDrawerOpen: false,
 };
 
 export default function ui(state = initialState, action) {

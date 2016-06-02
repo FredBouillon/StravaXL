@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const athleteUrl = window.location.origin + '/api/athlete';
+const athleteUrl = `${window.location.origin}/api/athlete`;
 
-export function get() {
-  return axios.get(athleteUrl);
-}
+export const get = () => axios.get(athleteUrl);
