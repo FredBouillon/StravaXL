@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Summary from './components/summary.jsx';
+import Summary from './containers/summary.jsx';
 import Activities from './containers/activities.jsx';
 import Home from './containers/home.jsx';
 import OAuth from './containers/oauth.jsx';
